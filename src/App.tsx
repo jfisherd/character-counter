@@ -7,22 +7,23 @@ import { StatsDisplay } from './components/StatsDisplay/StatsDisplay'
 import { CharacterCounter } from './components/CharacterCounter/CharacterCounter'
 
 function App() {
-  const [characterCount, setCharacterCount] = useState(0)
-  const [wordCount, setWordCount] = useState(0)
-  const [readingTime, setReadingTime] = useState(0)
+  const [myCharacterCount, setCharacterCount] = useState(0)
+  const [myWordCount, setWordCount] = useState(0)
+  const [myReadingTime, setReadingTime] = useState(0)
 
   const handleTextChange = (text: string) => {
     setCharacterCount(text.length) // CONSIDER WHETHER OR NOT TO COUNT SPACES
-    setWordCount(text.match(' '))
-    setReadingTime(wordCount * 5) // Assume 5 words per second
+    setWordCount(text.match(' ').length+1)
+    setReadingTime(myWordCount * 5) // Assume 5 words per second
   }
 
 
   return (
     <>
       {/* <input placeholder='TEST INPUT'></input> TESTING INPUT */}
+
       <TextInput onTextChange={handleTextChange}></TextInput>
-      <StatsDisplay stats={characterCount, wordCount, readingTime}></StatsDisplay>
+      <StatsDisplay TextStats={{characterCount:myCharacterCount,wordCount:myWordCount,readingTime:myReadingTime}}></StatsDisplay>
       <CharacterCounter></CharacterCounter>
 
 
