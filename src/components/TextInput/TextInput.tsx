@@ -4,7 +4,10 @@ export const TextInput = (props: TextInputProps) => {
 
     return (
         <>
-            <input placeholder="props.placeholder" >{props.initialValue}</input>
+            <input
+                placeholder="props.placeholder"
+                onChange={ (event) => props.onTextChange(event.target.value)}
+            >{props.initialValue}</input>
         </>
     )
 }
