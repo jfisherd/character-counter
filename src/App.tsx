@@ -1,25 +1,31 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
 import './App.css'
 import { TextInput } from './components/TextInput/TextInput'
 import { StatsDisplay } from './components/StatsDisplay/StatsDisplay'
 import { CharacterCounter } from './components/CharacterCounter/CharacterCounter'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [characterCount, setCharacterCount] = useState(0)
+  const [wordCount, setWordCount] = useState(0)
+  const [readingTime, setReadingTime] = useState(0)
 
   const handleTextChange = (text: string) => {
-    text = text
+    setCharacterCount(text.length) // CONSIDER WHETHER OR NOT TO COUNT SPACES
+    setWordCount(text.match(' '))
+    setReadingTime(wordCount * 5) // Assume 5 words per second
   }
+
 
   return (
     <>
+      {/* <input placeholder='TEST INPUT'></input> TESTING INPUT */}
       <TextInput onTextChange={handleTextChange}></TextInput>
-      <StatsDisplay stats={ }></StatsDisplay>
+      <StatsDisplay stats={characterCount, wordCount, readingTime}></StatsDisplay>
       <CharacterCounter></CharacterCounter>
 
-      {/* <input></input> TESTING INPUT*/}
+
       {/* <div> INITIAL VITE CODE
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
