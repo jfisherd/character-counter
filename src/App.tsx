@@ -9,9 +9,11 @@ import { CharacterCounter } from './components/CharacterCounter/CharacterCounter
 function App() {
   const [count, setCount] = useState(0)
 
+  const handleTextChange = () => {}
+
   return (
     <>
-      <TextInput onTextChange={}></TextInput>
+      <TextInput onTextChange={handleTextChange}></TextInput>
       <StatsDisplay stats={}></StatsDisplay>
       <CharacterCounter></CharacterCounter>
 
