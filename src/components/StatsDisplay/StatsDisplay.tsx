@@ -1,10 +1,10 @@
-import type { StatsDisplayProps, TextStats } from "../../types";
+import type { StatsDisplayProps } from "../../types";
 
-export const StatsDisplay = (stats: TextStats, showReadingTime?: boolean) => {
+export const StatsDisplay = (props: StatsDisplayProps) => {
 
-    const characterCount = stats.characterCount
-    const wordCount = stats.wordCount
-    const readingTime = stats.readingTime
+    const characterCount = props.stats.characterCount
+    const wordCount = props.stats.wordCount
+    const readingTime = props.stats.readingTime
 
     return (
         <>

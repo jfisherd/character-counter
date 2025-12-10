@@ -19,7 +19,7 @@ C
 
 > What considerations did you make when calculating reading time?
 
-T
+Reading time assumes 5 words are read per second, or 300 words per minute,
 <br>
 
 > How did you ensure the UI remained responsive during rapid text input?
@@ -29,7 +29,7 @@ I
 
 > What challenges did you face when implementing the statistics calculations?
 
-R
+Where to do the calculations, App.tsx or 
 <br>
 
 

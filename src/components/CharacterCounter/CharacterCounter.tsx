@@ -9,16 +9,30 @@ export const CharacterCounter = (props: CharacterCounterProps) => {
     const [myCharacterCount, setCharacterCount] = useState(0)
     const [myWordCount, setWordCount] = useState(0)
     const [myReadingTime, setReadingTime] = useState(0)
+    const [myText, setMyText] = useState('')
 
-    const[myText, setMyText] = useState('')
-    
+    const [textStats, setTextStats] = useState({
+        characterCount: myCharacterCount,
+        wordCount: myWordCount,
+        readingTime: myReadingTime
+    })
+
     const handleTextChange = (text: string) => {
         setMyText(text)
         setCharacterCount(text.length) // CONSIDER WHETHER OR NOT TO COUNT SPACES
         // .match() is not sufficient to count words... find another way
-        setWordCount(text.match(' ').length? text.match(' ').length : 0) // CONSIDER 0 CHARACTER CASE, +1 IS NOT SUFFICIENT
-        setReadingTime(myWordCount / 5) // Assume 5 words per second... CONVERT THIS TO MINUTES
+        // Use a .map on text with .match(' ')? Rough on performance?
+        setWordCount(text.match(' ').length ? text.match(' ').length : 0) // CONSIDER 0 CHARACTER CASE, +1 IS NOT SUFFICIENT
+        setReadingTime(myWordCount / 5 / 60) // Assume 5 words per second, 300 words per minute
+        setTextStats({
+            characterCount: myCharacterCount,
+            wordCount: myWordCount,
+            readingTime: myReadingTime
+        })
+        // ACCOUNT FOR THE OFF-BY-ONE DIFFERENCE (myCharacterCount and textStats.characterCount) NOTICED IN THE REACT DEV TOOLS (f12)
+
     }
+
 
 
     // const myStats = new TextStats(myCharacterCount,myWordCount,myReadingTime)
@@ -27,8 +41,8 @@ export const CharacterCounter = (props: CharacterCounterProps) => {
         <>
             <TextInput onTextChange={handleTextChange}></TextInput>
             <div>Your typed text: {myText}</div>
-            {/* <StatsDisplay TextStats={}></StatsDisplay> */}
-            <StatsDisplay />
+            <StatsDisplay stats={textStats}></StatsDisplay>
+
 
         </>
     )
