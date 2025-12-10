@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { CharacterCounterProps } from "../../types";
+import type { TextStats } from "../../types";
 import { TextInput } from "../TextInput/TextInput";
 import { StatsDisplay } from "../StatsDisplay/StatsDisplay";
 
@@ -9,19 +10,25 @@ export const CharacterCounter = (props: CharacterCounterProps) => {
     const [myWordCount, setWordCount] = useState(0)
     const [myReadingTime, setReadingTime] = useState(0)
 
-
-
+    const[myText, setMyText] = useState('')
+    
     const handleTextChange = (text: string) => {
+        setMyText(text)
         setCharacterCount(text.length) // CONSIDER WHETHER OR NOT TO COUNT SPACES
-        setWordCount(text.match(' ').length ?? 1) // CONSIDER 0 CHARACTER CASE, +1 IS NOT SUFFICIENT
-        setReadingTime(myWordCount / 5) // Assume 5 words per second
+        // .match() is not sufficient to count words... find another way
+        setWordCount(text.match(' ').length? text.match(' ').length : 0) // CONSIDER 0 CHARACTER CASE, +1 IS NOT SUFFICIENT
+        setReadingTime(myWordCount / 5) // Assume 5 words per second... CONVERT THIS TO MINUTES
     }
 
+
+    // const myStats = new TextStats(myCharacterCount,myWordCount,myReadingTime)
 
     return (
         <>
             <TextInput onTextChange={handleTextChange}></TextInput>
-            <StatsDisplay TextStats={{ characterCount: myCharacterCount, wordCount: myWordCount, readingTime: myReadingTime }}></StatsDisplay>
+            <div>Your typed text: {myText}</div>
+            {/* <StatsDisplay TextStats={}></StatsDisplay> */}
+            <StatsDisplay />
 
         </>
     )
