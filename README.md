@@ -29,8 +29,13 @@ I
 
 > What challenges did you face when implementing the statistics calculations?
 
-Where to do the calculations, App.tsx or 
+useState() variables were used to track and update the statistics. Several of the current useState() variables can probably be condensed into a single variable, placing the calculations directly into the updated object
 <br>
+
+Where to do the calculations, App.tsx or inside a component. App.tsx was restructured to return only one element and calculations were moved to the CharacterCounter.tsx component.
+<br>
+
+
 
 
 
