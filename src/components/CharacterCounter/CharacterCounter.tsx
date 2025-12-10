@@ -20,24 +20,26 @@ export const CharacterCounter = (props: CharacterCounterProps) => {
     // CHARACTER COUNT DOES NOT UPDATE UNTIL AFTER A SECOND WORD IS BEING TYPED
     const handleTextChange = (text: string) => {
         setMyText(text)
-        setCharacterCount(text.length) // CONSIDER WHETHER OR NOT TO COUNT SPACES
+        setCharacterCount(text.length? text.length : 1) // CONSIDER WHETHER OR NOT TO COUNT SPACES
         // .match() is not sufficient to count words... find another way
         // Use a .map on text with .match(' ')? Rough on performance?
         setWordCount(text.split(' ').length) // CONSIDER 0 CHARACTER CASE, +1 IS NOT SUFFICIENT
-        setReadingTime(myWordCount / 5 / 60) // Assume 5 words per second, 300 words per minute
+        setReadingTime(Math.round(myWordCount / 5 / 60 * 100)/100) // Assume 5 words per second, 300 words per minute
         setTextStats({
             characterCount: myCharacterCount,
             wordCount: myWordCount,
             readingTime: myReadingTime
         })
-        // ACCOUNT FOR THE OFF-BY-ONE DIFFERENCE (myCharacterCount and textStats.characterCount) NOTICED IN THE REACT DEV TOOLS (f12)
+        
+        // PASTING INTO THE INPUT FIELD DOES NOT COUNT AS A 'CHANGE'
     }
 
     return (
         <>
             <TextInput onTextChange={handleTextChange}></TextInput>
-            <div>Your typed text: {myText}</div>
             <StatsDisplay stats={textStats}></StatsDisplay>
+            <h4>Your typed text: {myText}</h4>
+            
 
 
         </>
